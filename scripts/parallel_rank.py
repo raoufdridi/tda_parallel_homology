@@ -4,7 +4,7 @@ import multiprocessing  as mp
 from simplicial_complex import *
 from edge_derivative import *
 
-#from cover import *
+ 
 
 
 def my_row_reduction(mat, n): #  returns rank, leftovers  
@@ -35,12 +35,6 @@ def my_mp(args_list):
 def parallel_rank(args_list):
     
     mp_res = my_mp(args_list)
-    #print "hello", mp_res
-    #print "mmmm", map(lambda x:  x[1][0], mp_res)
-    #print "rank", np.linalg.matrix_rank(np.array(map(lambda x:  x[1][0], mp_res)))
-    #print "++++++++++++++++++++++++++++"
-    #print "parallel processing done"
-    #print "mp_res", mp_res
 
     # concatenate different bottoms
     bottom = []
@@ -66,50 +60,12 @@ def get_number_of_edges(pair):
 def parallel_homology(K, partition):
     print "computing homology"
 
-    # def n_(i, partition):
-    #     #print sum(len(partition[j].edges) for j in range(0, i+1)) +1
-    #     return sum(len(partition[j].edges) for j in range(0, i+1)) + 1
-
-
-    #last_mat = d0(partition, len(partition)-1) 
-    # print "###############"
-    # print last_mat
-    # last_n = last_mat.shape[1]
-    # print "last_n=======================>", last_n-1
-    # print "##########################################################"
-    # print "##########################################################"
-    # print "##########################################################"
-
-
     n = sum(len(Ki.edges) for Ki in partition)
     # print  "n ===============>", n
     # print "sum(len(Ki.vertices) for Ki in partition)", sum(len(Ki.vertices) for Ki in partition)
     
     foo =[(d0(partition, i), n) for i in range(0, len(partition))]
-    
-    # for __i in range(0, len(partition)):
-    	
-    # 	if __i ==3:
-    # 		print "__i", __i
-	   #  	#print np.array(foo[__i][0])
-	   #  	print my_row_reduction(foo[__i][0], n)
-	   #  	print "partition[__i].edges", partition[__i].edges
-    #zzzz = np.concatenate(tuple(foo), axis=0).shape
-    #print zzzz
-    # print "##########################################################"
-    # print "##########################################################"
-    # print "##########################################################"
 
- 	   
-    
-    #print [n_(i, partition) for i in range(0, len(partition))]
-    #foo += [(last_mat, last_n)] 
-    # for i in range(0, len(partition)-1):
-    #   print "==========================="
-    #   print "i", i
-    #   print "edges", partition[i].edges
-    #   print "vertices", partition[i].vertices
-    #   print  d0(partition, i)
     print "-----> parallel rank computation started"
     rk0 =   parallel_rank(foo)
     print "-----> parallel rank computation done"
@@ -211,7 +167,7 @@ def main():
   #zzzz = np.concatenate(zz, axis=0)
   #print d0(partition, 0)
   #print (d0(partition, 1))
-  #print zzzz
+   
   #print "rank", np.linalg.matrix_rank(zzzz)
   #print sum(len(Ki.vertices) for Ki in partition)
   #print "==============================================="
